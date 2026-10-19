@@ -1,0 +1,932 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #fffbf3;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   NAVIGATION BASE & STICKY HEADER
+   ========================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background-color: #fffbf3;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Burgermenu knap (Synlig på mobil) */
+.burger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  width: 24px;
+  z-index: 1002;
+}
+
+.burger-menu span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* Kryds-animation når burgermenuen er åben */
+.burger-menu.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobil navigation - overlay menu */
+.nav-links {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fffbf3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 90px 32px 40px 32px;
+  gap: 24px;
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+/* Åben mobilmenu */
+.nav-links.active {
+  transform: translateY(0);
+}
+
+.nav-links .divider {
+  display: none; /* Skjul dividers på mobil */
+}
+
+.nav-item {
+  width: 100%;
+}
+
+.nav-links a.nav-link {
+  font-family: "futura-pt", sans-serif;
+  color: #000;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+/* Mobil Dropdown for Shop */
+.shop-dropdown {
+  display: none;
+  padding-top: 16px;
+  padding-left: 12px;
+}
+
+.has-dropdown.active-mobile .shop-dropdown {
+  display: block;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dropdown-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cat-link {
+  font-family: "futura-pt", sans-serif;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+}
+
+.cat-link.main-cat {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+.dropdown-shoes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.dropdown-shoe-item img {
+  width: 100%;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Logo centreret i headeren */
+.nav-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-logo img {
+  height: 11px;
+  display: block;
+}
+
+/* Ikoner til højre (Søg, Hjerte, Kurv) */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 1002;
+}
+
+.nav-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.nav-icons img {
+  height: 11px;
+  width: 11px;
+  object-fit: contain;
+  display: block;
+  transition:
+    filter 0.25s ease,
+    transform 0.2s ease;
+  will-change: filter, transform;
+}
+
+/* ==========================================
+   HERO SEKTION & SLOGAN
+   ========================================== */
+.hero {
+  position: relative;
+  height: calc(100vh - 70px);
+  overflow: hidden;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-brand-wrap {
+  position: absolute;
+  bottom: 45px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 2;
+}
+
+.logo {
+  height: 20px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.hero-slogan {
+  font-family: "futura-pt", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #fffbf3;
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  will-change: transform, opacity;
+}
+
+/* ==========================================
+   ABOUT / KARRUSEL
+   ========================================== */
+.about-section {
+  padding: 60px 24px;
+  background-color: #fffbf3;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  overflow: hidden;
+}
+
+.about-content h2 {
+  font-family: "Aboreto", system-ui;
+  font-size: 38px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+  color: #000;
+}
+
+.about-content p {
+  font-family: "futura-pt", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #000;
+  max-width: 280px;
+  margin-bottom: 30px;
+}
+
+.buy-btn {
+  position: relative;
+  display: inline-block;
+  font-family: "futura-pt", sans-serif;
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+  background-color: transparent;
+  border: 1px solid #000000;
+  padding: 12px 28px;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.buy-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.buy-btn:hover {
+  color: #fffbf3;
+}
+
+.buy-btn:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.carousel-wrapper {
+  width: 100vw;
+  margin-left: -24px;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: smoothScroll 25s linear infinite;
+}
+
+.carousel-track img {
+  width: 260px;
+  height: 320px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+@keyframes smoothScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 8px));
+  }
+}
+
+.carousel-wrapper:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+/* ==========================================
+   THE MOST LOVED
+   ========================================== */
+.most-loved {
+  padding: 60px 24px;
+  background-color: #fffbf3;
+  border-top: 1px solid #8d7b68;
+  border-bottom: 1px solid #8d7b68;
+  margin: 0 24px 60px 24px;
+  text-align: center;
+}
+
+.most-loved-header h2 {
+  font-family: "Aboreto", system-ui;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.most-loved-header p {
+  font-family: "futura-pt", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
+  max-width: 600px;
+  margin: 0 auto 50px auto;
+}
+
+.shoes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+.shoe-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.shoe-card img {
+  width: 100%;
+  max-width: 240px;
+  height: 110px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.shoe-card h3 {
+  font-family: "futura-pt", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  transition: opacity 0.3s ease;
+}
+
+.shoe-card:hover img {
+  transform: translateY(-8px) scale(1.05);
+}
+
+.shoe-card:hover h3 {
+  opacity: 0.7;
+}
+
+.most-loved-btn-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.buy-btn-wide {
+  padding: 12px 48px;
+}
+
+/* ==========================================
+   MADE WITH INTENTION
+   ========================================== */
+.intention-section {
+  padding: 60px 24px 100px 24px;
+  background-color: #fffbf3;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.intention-content {
+  text-align: center;
+}
+
+.intention-content h2 {
+  font-family: "Aboreto", system-ui;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: #000;
+}
+
+.intention-content p {
+  font-family: "futura-pt", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
+  max-width: 320px;
+  margin: 0 auto 30px auto;
+}
+
+.intention-images {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.intention-images img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* Scroll-driven animation kun når browseren understøtter det */
+@supports (animation-timeline: view()) {
+  .intention-images img {
+    opacity: 0;
+    animation: fadeIn linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+  }
+
+  /* Valgfrit: Det andet billede starter sin fade lidt senere */
+  .intention-images img:nth-child(2) {
+    animation-range: entry 25% cover 45%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px); /* Lille blød bevægelse opad */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.site-footer {
+  background-color: #462417;
+  color: #fffbf3;
+  padding: 50px 24px 30px 24px;
+  font-family: "futura-pt", sans-serif;
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-col h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 12px 0;
+  color: #fffbf3;
+}
+
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0 0 20px 0;
+  color: #e0d8ce;
+  max-width: 300px;
+}
+
+.footer-col-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.footer-col-title img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.footer-col-title h3 {
+  margin: 0;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  color: #e0d8ce;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #fffbf3;
+}
+
+.newsletter-form {
+  display: flex;
+  align-items: center;
+  background-color: #fffbf3;
+  border: 1px solid #fffbf3;
+  width: 100%;
+  max-width: 320px;
+}
+
+.newsletter-form input {
+  background: transparent;
+  border: none;
+  padding: 12px 16px;
+  font-family: "futura-pt", sans-serif;
+  font-size: 14px;
+  color: #000;
+  width: 100%;
+  outline: none;
+}
+
+.newsletter-form button {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 0 16px;
+  cursor: pointer;
+  color: #000;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.social-links img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.footer-logo {
+  height: 16px;
+  width: auto;
+  display: block;
+}
+
+.copyright p {
+  font-size: 13px;
+  color: #e0d8ce;
+  margin: 0;
+}
+
+.copyright a {
+  color: #e0d8ce;
+  text-decoration: underline;
+}
+
+/* ==========================================
+   DESKTOP (min-width: 768px)
+   ========================================== */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 24px 48px;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .burger-menu {
+    display: none;
+  }
+
+  .nav-links {
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 16px;
+    transform: none;
+    overflow-y: visible;
+  }
+
+  .nav-links .divider {
+    display: inline;
+    color: #000;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .nav-item {
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    position: static;
+  }
+
+  .nav-links a.nav-link {
+    font-size: 15px;
+    padding-bottom: 6px;
+  }
+
+  .nav-links a.nav-link:hover,
+  .has-dropdown:hover .shop-link {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .nav-logo img {
+    height: 28px;
+  }
+
+  .nav-icons {
+    gap: 22px;
+  }
+
+  .nav-icons img {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* --- MEGA DROPDOWN PERFEKT FLUGTENDE MED NAVBAREN --- */
+  .has-dropdown {
+    position: static;
+  }
+
+  .shop-dropdown {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fffbf3;
+    padding: 40px 48px 60px 48px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition:
+      opacity 0.3s ease 0.15s,
+      transform 0.3s ease 0.15s,
+      visibility 0.3s ease 0.15s;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .shop-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+  }
+
+  .has-dropdown:hover .shop-dropdown,
+  .shop-dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  .dropdown-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0;
+  }
+
+  .dropdown-categories {
+    gap: 24px;
+    width: 250px;
+  }
+
+  .cat-link {
+    font-size: 15px;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .cat-link.main-cat {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .cat-link:hover {
+    color: #000;
+    transform: translateX(4px);
+  }
+
+  .dropdown-shoes {
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+  }
+
+  .dropdown-shoe-item img {
+    height: 70px;
+    width: auto;
+    max-width: 180px;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+  }
+
+  .dropdown-shoe-item:hover img {
+    transform: translateY(-6px) scale(1.05);
+  }
+
+  /* Hero Desktop */
+  .hero-brand-wrap {
+    bottom: 90px;
+    right: 60px;
+  }
+
+  .logo {
+    height: 45px;
+    margin-bottom: 8px;
+  }
+
+  .hero-slogan {
+    font-size: 16px;
+    letter-spacing: 1.5px;
+  }
+
+  /* About Desktop */
+  .about-section {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px 48px;
+    gap: 60px;
+  }
+
+  .about-content {
+    width: 40%;
+    flex-shrink: 0;
+  }
+
+  .about-content h2 {
+    font-size: 52px;
+  }
+
+  .about-content p {
+    font-size: 18px;
+    max-width: 320px;
+  }
+
+  .carousel-wrapper {
+    width: 55%;
+    margin-left: 0;
+  }
+
+  .carousel-track img {
+    width: 280px;
+    height: 360px;
+  }
+
+  /* Most Loved Desktop */
+  .most-loved {
+    padding: 80px 48px;
+    margin: 0 48px 80px 48px;
+  }
+
+  .most-loved-header h2 {
+    font-size: 32px;
+  }
+
+  .shoes-grid {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .shoe-card {
+    flex: 1;
+  }
+
+  .shoe-card img {
+    max-width: 220px;
+  }
+
+  /* Made With Intention Desktop */
+  .intention-section {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px 48px 140px 48px;
+    gap: 60px;
+  }
+
+  .intention-content {
+    text-align: left;
+    width: 30%;
+    flex-shrink: 0;
+  }
+
+  .intention-content h2 {
+    font-size: 36px;
+  }
+
+  .intention-content p {
+    margin: 0 0 35px 0;
+    max-width: 300px;
+  }
+
+  .intention-images {
+    flex-direction: row;
+    width: 65%;
+    gap: 24px;
+  }
+
+  .intention-images img {
+    width: calc(50% - 12px);
+    height: 380px;
+  }
+
+  /* Footer Desktop */
+  .site-footer {
+    padding: 70px 48px 40px 48px;
+  }
+
+  .footer-top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+  }
+
+  .newsletter-col {
+    max-width: 320px;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    height: 16px;
+  }
+}
